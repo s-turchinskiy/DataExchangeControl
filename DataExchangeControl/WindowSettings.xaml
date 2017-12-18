@@ -1,0 +1,54 @@
+﻿<Window
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:sys="clr-namespace:System;assembly=mscorlib"
+            xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:wpfx="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit/extended"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="WpfApplication1.WindowSettings"
+        Title="Настройки" Height="300" Width="750" WindowStyle="ToolWindow" Loaded="Window_Loaded">
+    <Grid>
+        <DockPanel x:Name ="PanelLeft"  Background="#FFFCFAEB" LastChildFill="True">
+            <Label Content="Отслеживаемые файлы:" DockPanel.Dock="Top" Height="25"/>
+            <DockPanel x:Name ="PanelManagementTable" Background="#FFF5F2DD" DockPanel.Dock="Top" Height="25">
+                <telerik:RadRibbonButton Name ="ButtonNewExcange"  Height="Auto" 
+                                              Text="Добавить файлы для отслеживания" Width="Auto" Click="ButtonNewExcange_Click" BorderBrush="#FFB3AC86" Background="#FFEBE7CD" CornerRadius="0">
+                </telerik:RadRibbonButton>
+            </DockPanel>
+            <Border x:Name ="Border1" BorderThickness="0,1,0,0" BorderBrush="#FFB3AC86" DockPanel.Dock="Bottom" Height="25">
+                <DockPanel x:Name ="PanelButtonReply" Background="#FFF5F2DD" DockPanel.Dock="Bottom" >
+                    <telerik:RadRibbonButton Name ="RadRibbonButtonCancel" DockPanel.Dock="Right" 
+                                             Height="Auto" Text=" Отмена " Width="Auto" IsCancel="True">
+                        <telerik:RadToolBarSeparator Margin="0" Width="2"/>
+                    </telerik:RadRibbonButton>
+                    <telerik:RadRibbonButton Name ="RadRibbonButtonOK" HorizontalAlignment="Right" Height="Auto" 
+                                              Text="ОК" Width="Auto" Click="RadRibbonButtonOK_Click" IsDefault="True">
+                    </telerik:RadRibbonButton>
+
+                </DockPanel>
+            </Border>
+            <StackPanel x:Name ="PanelCountPoint" Orientation="Horizontal" DockPanel.Dock="Bottom" Height="25">
+                <Label Content="Максимальное количество точек графика:  "/>
+                <xctk:ButtonSpinner x:Name="ButtonMaxCountPoint" Width="50" Height="19" Spin="ButtonMaxCountPoint_Spin" Background="White" Content="20" />
+            </StackPanel>
+            <ListView x:Name="TableFilePath" DockPanel.Dock="Top" MinHeight="193" MinWidth="500" UseLayoutRounding="False" 
+				Margin="0,1,0,1" ItemsSource="{DynamicResource ResourceKey=teams}" 
+				SnapsToDevicePixels="True" ScrollViewer.VerticalScrollBarVisibility="Visible" 
+				Grid.IsSharedSizeScope="True" Padding="0" BorderThickness="1" 
+                   >
+                <ListView.Resources>
+                    <col:ArrayList x:Key="teams"/>
+                </ListView.Resources>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding _strNameExchange}" Header="Обмен"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding _strFilePath}" Header="Путь"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding _strNameExchangeBack}" Header="Обмен"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding _strFilePathBack}" Header="Путь"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+        </DockPanel>
+    </Grid>
+</Window>
